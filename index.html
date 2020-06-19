@@ -3,6 +3,265 @@
   	<head>
 		<title>Five Nights at Femboy Hooters</title>
 		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono&display=swap" rel="stylesheet">
+		<style>
+			*{
+				overflow: hidden;
+				user-select: none;
+			/* 	image-rendering: pixelated; */
+			}
+			body{
+				background-color: black;
+			}
+			.font{
+				font-family: "Roboto Mono";
+				color: white;
+			}
+			#title{
+				font-size: 8vmin;
+				padding-left: 8vmin;
+			}
+			#start{
+				font-size: 8vmin;
+				padding-left: 8vmin;
+				margin-top: 10vmin;
+				cursor: pointer;
+				z-index: 3;
+				position: relative;
+			}
+			#continue{
+				font-size: 8vmin;
+				padding-left: 8vmin;
+				margin-top: 10vmin;
+				cursor: pointer;
+				z-index: 3;
+				position: relative;
+				display: none;
+			}
+			#static{
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 100vh;
+				width: 100vw;
+				background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cdb6ceaf-da99-4ba4-a511-7810190e4182/dd2760y-f2ccd6f3-daa3-44b4-a35d-3bf1996ee454.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvY2RiNmNlYWYtZGE5OS00YmE0LWE1MTEtNzgxMDE5MGU0MTgyXC9kZDI3NjB5LWYyY2NkNmYzLWRhYTMtNDRiNC1hMzVkLTNiZjE5OTZlZTQ1NC5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.N317YayhCrpzZCR8zlTz-XOpWnbvEmHJJrsx1qZrgic");
+				background-size: cover;
+				mix-blend-mode: lighten;
+				z-index: 2;
+				opacity: 0.5;
+			}
+			#static2{
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 100vh;
+				width: 100vw;
+				background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cdb6ceaf-da99-4ba4-a511-7810190e4182/dd2760y-f2ccd6f3-daa3-44b4-a35d-3bf1996ee454.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvY2RiNmNlYWYtZGE5OS00YmE0LWE1MTEtNzgxMDE5MGU0MTgyXC9kZDI3NjB5LWYyY2NkNmYzLWRhYTMtNDRiNC1hMzVkLTNiZjE5OTZlZTQ1NC5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.N317YayhCrpzZCR8zlTz-XOpWnbvEmHJJrsx1qZrgic");
+				background-size: cover;
+				z-index: 100002;
+				opacity: 0.2;
+			}
+			#flashlight{
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 100vh;
+				width: 100vw;
+				background: url("https://steamuserimages-a.akamaihd.net/ugc/518260088829666633/E43F9AC42907CA4FE82849F0DFB15CB48F136177/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+				background-size: cover;
+				background-position: center;
+				mix-blend-mode: multiply;
+				z-index: 100001;
+				transform: scale(1);
+			}
+			#flashlight.off{
+				background: black;
+				opacity: 0.95;
+			}
+			#screen{
+				position: fixed;
+				top: 0;
+				left: -200vw;
+				height: 100vh;
+				width: 500vw;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				z-index: 1;
+				filter: grayscale(0.8) contrast(0.8);
+			}
+			#map{
+				position: fixed;
+				right: 0;
+				bottom: 0;
+				z-index: 100003;
+				height: 80vmin;
+				image-rendering: pixelated;
+			}
+			.icon{
+				font-family: "Press Start 2P";
+				color: white;
+				position: fixed;
+				font-size: 2vmin;
+				border: 0.625vmin solid white;
+				padding: 0.625vmin;
+				background: #333;
+				display: inline-block;
+				z-index: 100004;
+				cursor: pointer;
+			}
+			.icon.selected{
+				background: #bde317;
+			}
+			#game{
+				display: none;
+				position: fixed;
+				top: -5vmin;
+				left: -5vmin;
+				width: 100vw;
+				height: 100vh;
+				transform: perspective(100vw) rotateX(0deg);
+				transition: transform .4s;
+				border: 5vmin solid #444;
+				background: black;
+			}
+			#game.down{
+				transform: perspective(100vw) translateY(75vh) rotateX(90deg);
+			}
+			#face{
+				position: fixed;
+				background: url("https://jchabin.github.io/femboyhooters/cutout.png");
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				right: 0;
+				top: 0;
+				width: 100vmin;
+				height: 100vh;
+				filter: brightness(0.6) contrast(5) grayscale(0.7);
+			}
+			.femboy{
+				position: fixed;
+				top: 0;
+				left: 250vw;
+				height: 100vh;
+				z-index: 1;
+			/* 	mix-blend-mode: lighten; */
+			}
+			@keyframes blink{
+				0%{ visibility: visible; }
+				50%{ visibility: hidden; }
+				100%{ visibility: hidden; }
+			}
+			#error{
+				position: fixed;
+				right: 55vmin;
+				bottom: 10vmin;
+				font-family: "Press Start 2P";
+				font-size: 4vmin;
+				color: #f31;
+				z-index: 100004;
+				display: none;
+				padding: 5vmin;
+				text-shadow: 0 0 1vmin #f00;
+				animation: blink 0.5s infinite;
+			}
+			.door{
+				position: fixed;
+				height: calc(2.5vmin + 2px);
+				width: calc(2.5vmin + 2px);
+				z-index: 100004;
+				cursor: pointer;
+				mix-blend-mode: lighten;
+				transform: translate(1px, 1px);
+			}
+			.door.selected{
+				background: #bde317;
+			}
+			#fight{
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: black;
+			}
+			#gun{
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				transform: scaleX(-1);
+				height: 80vmin;
+				z-index: -1;
+			}
+			.fighter{
+				position: fixed;
+				cursor: pointer;
+				z-index: 0;
+				height: 75vmin;
+			}
+			#gameover{
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: black;
+				color: #f31;
+				font-size: 10vmin;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100vh;
+				font-family: "Press Start 2P";
+				z-index: 100005;
+				display: none;
+				text-shadow: 0 0 3vmin #f00;
+			}
+			#night{
+				background: black;
+				color: white;
+				font-family: "Roboto Mono";
+				font-size: 10vmin;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100vh;
+				height: 100vh;
+				width: 100vw;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 100006;
+				display: none;
+			}
+			#battery{
+				position: fixed;
+				top: 10vmin;
+				right: 10vmin;
+				color: white;
+				font-family: "Press Start 2P";
+				font-size: 4vmin;
+				z-index: 100004;
+			}
+			#time{
+				position: fixed;
+				top: 10vmin;
+				left: 10vmin;
+				color: white;
+				font-family: "Press Start 2P";
+				font-size: 4vmin;
+				z-index: 100004;
+			}
+			#screenoff{
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: black;
+				z-index: 100005;
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="main">
