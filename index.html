@@ -20,6 +20,13 @@
 				font-size: 8vmin;
 				padding-left: 8vmin;
 			}
+			#controls{
+				position: fixed;
+				right: 5vmin;
+				top: 5vmin;
+				text-align: right;
+				font-size: 4vmin;
+			}
 			#start{
 				font-size: 8vmin;
 				padding-left: 8vmin;
@@ -269,6 +276,13 @@
 			<div class="font" id="start" onclick="start(0)">New Game</div>
 			<div class="font" id="continue" onclick="start(parseInt(localStorage.fnafLevel))">Continue</div>
 			<div id="face"></div>
+			<div class="font" id="controls">
+				SPACE - Flashlight<br/>
+				MOUSE - Turn camera<br/>
+				Change camera<br/>
+				Lock door<br/>
+				Fire gun
+			</div>
 			<div id="static"></div>
 		</div>
 		<div id="night">NIGHT 0</div>
